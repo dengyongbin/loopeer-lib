@@ -1,0 +1,16 @@
+{
+    "name": "loopeer/loopeer",
+    "description": "loopeer server lib to sms jpush and other",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dengyongbin",
+            "email": "dengyongbin@loopeer.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.3",
+        "jpush/jpush": "v3.2.1"
+    }
+}
