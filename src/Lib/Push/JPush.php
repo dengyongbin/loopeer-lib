@@ -8,7 +8,7 @@
  * Date: 15/6/5
  * Time: 上午11:58
  */
-namespace Loopeer\Push;
+namespace Loopeer\Lib\Push;
 
 class JPush {
 

@@ -13,7 +13,7 @@ use Loopeer\Push;
 class JPushTest extends PHPUnit_Framework_TestCase {
 
     public function push() {
-        $jpush = new Loopeer\Push\JPush('dd1066407b044738b6479275', '6b135be0037a5c1e693c3dfa', false);
+        $jpush = new Loopeer\Lib\Push\JPush('dd1066407b044738b6479275', '6b135be0037a5c1e693c3dfa', false);
         $jpush->pushNotification('0a0e477959a', 'test jpush msg', null, null);
     }
 }

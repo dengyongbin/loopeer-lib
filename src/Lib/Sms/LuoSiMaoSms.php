@@ -8,7 +8,7 @@
  * Date: 15/6/5
  * Time: 上午11:52
  */
-namespace Loopeer\Sms;
+namespace Loopeer\Lib\Sms;
 
 /**
  * 短信平台发送短信和语音类

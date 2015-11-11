@@ -1,7 +1,8 @@
 {
     "name": "loopeer/lib",
-    "description": "loopeer server lib to sms jpush and other",
+    "description": "Loopeer server lib to sms jpush and other",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "dengyongbin",
@@ -12,5 +13,8 @@
     "require": {
         "php": ">=5.3",
         "jpush/jpush": "v3.2.1"
+    },
+    "autoload": {
+        "psr-4": {"Lib\\": "src/Lib"}
     }
 }
