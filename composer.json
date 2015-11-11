@@ -15,6 +15,6 @@
         "jpush/jpush": "v3.2.1"
     },
     "autoload": {
-        "psr-4": {"Lib\\": "src/Lib"}
+        "psr-4": {"Loopeer\\Lib\\": "src/"}
     }
 }
