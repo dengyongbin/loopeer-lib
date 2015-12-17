@@ -11,6 +11,7 @@
 namespace Loopeer\Lib\Push;
 
 use PushSDK;
+use Log;
 
 /**
  * 百度推送封装类
@@ -33,7 +34,7 @@ class BPush {
     public function __construct($apiKey, $secretKey, $msgType = 1, $deployStatus = 1) {
         $this->apiKey = $apiKey;
         $this->secretKey = $secretKey;
-        $this->$sdk = new PushSDK($this->apiKey, $this->secretKey);
+        $this->sdk = new PushSDK($this->apiKey, $this->secretKey);
         $this->opts = array (
             'msg_type' => $msgType,
             //'deploy_status' => $deployStatus,
@@ -100,10 +101,10 @@ class BPush {
     private function printResult($rs) {
         // 判断返回值,当发送失败时, $rs的结果为false, 可以通过getError来获得错误信息.
         if($rs === false){
-            print_r($this->sdk->getLastErrorCode());
-            print_r($this->sdk->getLastErrorMsg());
+            Log::info($this->sdk->getLastErrorCode());
+            Log::info($this->sdk->getLastErrorMsg());
         }else{
-            print_r($rs);
+            Log::info($rs);
         }
     }
 }
