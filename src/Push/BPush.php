@@ -36,7 +36,7 @@ class BPush {
         $this->$sdk = new PushSDK($this->apiKey, $this->secretKey);
         $this->opts = array (
             'msg_type' => $msgType,
-            'deploy_status' => $deployStatus,
+            //'deploy_status' => $deployStatus,
         );
     }
 
