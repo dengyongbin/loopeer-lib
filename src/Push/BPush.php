@@ -11,7 +11,6 @@
 namespace Loopeer\Lib\Push;
 
 use PushSDK;
-use Log;
 
 /**
  * 百度推送封装类
@@ -46,12 +45,13 @@ class BPush {
      * @param $channelId
      * @param $description
      * @param $custom_content
+     * @return string
      */
     public function pushSingleMessage($channelId, $description, $custom_content) {
         $msg = self::buildMessage($description, $custom_content);
         // 向目标设备发送一条消息
         $rs = $this->sdk->pushMsgToSingleDevice($channelId, $msg, $this->opts);
-        $this->printResult($rs, $this->sdk);
+        return $this->printResult($rs, $this->sdk);
     }
 
     /**
@@ -59,24 +59,26 @@ class BPush {
      * @param $accountIds
      * @param $description
      * @param $custom_content
+     * @return string
      */
     public function pushBatchMessage($accountIds, $description, $custom_content){
         // 向一批设备发送一条消息
         $message = self::buildMessage($description, $custom_content);
         $rs = $this->sdk->pushBatchUniMsg($accountIds, $message, $this->opts);
-        $this->printResult($rs);
+        return $this->printResult($rs);
     }
 
     /**
      * 向所有设备推送消息
      * @param $description
      * @param $custom_content
+     * @return string
      */
     public function pushAllMessage($description, $custom_content) {
         $message = self::buildMessage($description, $custom_content);
         // 向一批设备发送一条消息
         $rs = $this->sdk->pushMsgToAll($message, $this->opts);
-        $this->printResult($rs);
+        return $this->printResult($rs);
     }
 
     /**
@@ -97,14 +99,14 @@ class BPush {
     /**
      * 打印推送结果
      * @param $rs
+     * @return string
      */
     private function printResult($rs) {
         // 判断返回值,当发送失败时, $rs的结果为false, 可以通过getError来获得错误信息.
+        $result = 'push success';
         if($rs === false){
-            Log::info($this->sdk->getLastErrorCode());
-            Log::info($this->sdk->getLastErrorMsg());
-        }else{
-            Log::info($rs);
+            $result = 'push error code = ' . $this->sdk->getLastErrorCode() . ' error_msg = ' . $this->sdk->getLastErrorMsg();
         }
+        return $result;
     }
 }
