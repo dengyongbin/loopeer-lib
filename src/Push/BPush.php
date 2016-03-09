@@ -89,6 +89,10 @@ class BPush {
      */
     private function buildMessage($description, $custom_content = array()) {
         $message = array(
+            'aps' => array(
+                'alert' => $description,
+                'sound' => 'default'
+            ),
             'description' => $description,
             'created_at' => time(),
             'custom_content' => $custom_content
