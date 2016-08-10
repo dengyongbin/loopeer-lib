@@ -30,6 +30,15 @@ class SendcloudService {
     private $template_submit_api;
     private $mail_send_api;
     private $mail_send_template_api;
+    private $addresslist_list_api;
+    private $addresslist_add_api;
+    private $addresslist_delete_api;
+    private $addresslist_update_api;
+    private $addressmember_list_api;
+    private $addressmember_get_api;
+    private $addressmember_add_api;
+    private $addressmember_update_api;
+    private $addressmember_delete_api;
 
     public function __construct($api_key, $api_user) {
         $this->api_key = $api_key;
@@ -42,6 +51,15 @@ class SendcloudService {
         $this->template_submit_api = 'http://api.sendcloud.net/apiv2/template/submit?apiUser=' . $this->api_user . '&apiKey=' . $this->api_key . '&invokeName=';
         $this->mail_send_api = 'http://api.sendcloud.net/apiv2/mail/send';
         $this->mail_send_template_api = 'http://api.sendcloud.net/apiv2/mail/sendtemplate';
+        $this->addresslist_list_api = 'http://api.sendcloud.net/apiv2/addresslist/list';
+        $this->addresslist_add_api = 'http://api.sendcloud.net/apiv2/addresslist/add';
+        $this->addresslist_delete_api = 'http://api.sendcloud.net/apiv2/addresslist/delete';
+        $this->addresslist_update_api = 'http://api.sendcloud.net/apiv2/addresslist/update';
+        $this->addressmember_list_api = 'http://api.sendcloud.net/apiv2/addressmember/list';
+        $this->addressmember_get_api = 'http://api.sendcloud.net/apiv2/addressmember/get';
+        $this->addressmember_add_api = 'http://api.sendcloud.net/apiv2/addressmember/add';
+        $this->addressmember_update_api = 'http://api.sendcloud.net/apiv2/addressmember/update';
+        $this->addressmember_delete_api = 'http://api.sendcloud.net/apiv2/addressmember/delete';
     }
 
     public function getTemplateDetail($invokeName) {
@@ -95,7 +113,48 @@ class SendcloudService {
         return $this->post($data, $this->mail_send_template_api);
     }
 
+    public function addresslist($data, $method) {
+        switch($method) {
+            case 'list' :
+                $request_url = $this->addresslist_list_api;
+                break;
+            case 'add' :
+                $request_url = $this->addresslist_add_api;
+                break;
+            case 'delete' :
+                $request_url = $this->addresslist_delete_api;
+                break;
+            case 'update' :
+                $request_url = $this->$addresslist_update_api;
+                break;
+        }
+        return $this->post($data, $request_url);
+    }
+
+    public function addressmember($data, $method) {
+        switch($method) {
+            case 'list' :
+                $request_url = $this->addressmember_list_api;
+                break;
+            case 'add' :
+                $request_url = $this->addressmember_add_api;
+                break;
+            case 'delete' :
+                $request_url = $this->addressmember_delete_api;
+                break;
+            case 'update' :
+                $request_url = $this->addressmember_update_api;
+                break;
+            case 'get' :
+                $request_url = $this->addressmember_get_api;
+                break;
+        }
+        return $this->post($data, $request_url);
+    }
+
     private function post($data, $url) {
+        $data['apiKey'] = $this->api_key;
+        $data['apiUser'] = $this->api_user;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-Requested-With:XMLHttpRequest'));
